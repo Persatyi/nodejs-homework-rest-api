@@ -5,6 +5,7 @@ const updateById = async (req, res) => {
   const { contactId } = req.params;
   const result = await Contact.findByIdAndUpdate(contactId, req.body, {
     new: true,
+    select: "-__v",
   });
 
   if (!result) {

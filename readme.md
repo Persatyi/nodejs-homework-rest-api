@@ -1,31 +1,114 @@
 ## GoIT Node.js Course Template Homework
 
-Выполните форк этого репозитория для выполнения домашних заданий (2-6)
-Форк создаст репозиторий на вашем http://github.com
+-Overview
 
-Добавьте ментора в коллаборацию
+This app allows the creation back-end for adding phone contacts along with possibility to edit or change status.
+To save data we using siple database - MongoDB.
 
-Для каждой домашней работы создавайте свою ветку.
+### API
 
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
+# Get all contacts: `GET` /api/contacts/
 
-Каждая новая ветка для дз должна делаться с master
+Paramaters: No parameters
+Media type: aplication/json
+Response example value:
+[
+{
+"_id": "62a86a9b3fc333ef2a601319",
+"name": "Allen Raymond",
+"email": "nulla.ante@vestibul.co.uk",
+"phone": "(992) 914-3792",
+"favorite": false
+},
+{
+"_id": "62a86a9b3fc333ef2a60131a",
+"name": "Chaim Lewis",
+"email": "dui.in@egetlacus.ca",
+"phone": "(294) 840-6685",
+"favorite": true
+}
+]
 
-После того как вы закончили выполнять домашнее задание в своей ветке, необходимо сделать пулл-реквест (PR). Потом добавить ментора для ревью кода. Только после того как ментор заапрувит PR, вы можете выполнить мердж ветки с домашним заданием в мастер.
+# Get one contact: `GET` /api/contacts/`:contactId`
 
-Внимательно читайте комментарии ментора. Исправьте замечания и сделайте коммит в ветке с домашним заданием. Изменения подтянуться в PR автоматически после того как вы отправите коммит с исправлениями на github
-После исправления снова добавьте ментора на ревью кода.
+Paramaters: `contactId`
+Media type: aplication/json
+Response example value:
+{
+"\_id": "62a86a9b3fc333ef2a601319",
+"name": "Allen Raymond",
+"email": "nulla.ante@vestibul.co.uk",
+"phone": "(992) 914-3792",
+"favorite": false
+}
 
-- При сдаче домашней работы есть ссылка на PR
-- JS-код чистый и понятный, для форматирования используется Prettier
+# Add contact `POST` /api/contacts/
 
-### Команды:
+Paramaters:
+{
+"name": "Allen Raymond", <=== `required`
+"email": "nulla.ante@vestibul.co.uk", <=== `required`
+"phone": "(992) 914-3792", <=== `required`
+"favorite": false <=== `(if not included in request, default parameter will be `false`)`
+}
 
-- `npm start` &mdash; старт сервера в режиме production
-- `npm run start:dev` &mdash; старт сервера в режиме разработки (development)
-- `npm run lint` &mdash; запустить выполнение проверки кода с eslint, необходимо выполнять перед каждым PR и исправлять все ошибки линтера
-- `npm lint:fix` &mdash; та же проверка линтера, но с автоматическими исправлениями простых ошибок
+Media type: aplication/json
+Response example value:
+{
+"\_id": "62a86a9b3fc333ef2a601319",
+"name": "Allen Raymond",
+"email": "nulla.ante@vestibul.co.uk",
+"phone": "(992) 914-3792",
+"favorite": false
+}
+
+# Remove contact `DELETE` /api/contacts/`:contactId`
+
+Paramaters: `contactId`
+Media type: aplication/json
+Response example value:
+{
+"message": "contact deleted"
+}
+
+# Edit contact `PUT` /api/contacts/`:contactId`
+
+Paramaters: `contactId`,
+{
+"name": "Ajax Poly", <=== `required`
+"email": "nulla.ante@vestibul.co.uk", <=== `required`
+"phone": "(992) 914-3792", <=== `required`
+"favorite": false <=== `(if not included in request, default parameter will be `false`)`
+}
+Media type: aplication/json
+Response example value:
+{
+"\_id": "62a86a9b3fc333ef2a601319",
+"name": "Ajax Poly",
+"email": "nulla.ante@vestibul.co.uk",
+"phone": "(992) 914-3792",
+"favorite": false
+}
+
+# Update contact status `PATCH` /api/contacts/`:contactId`/favorite
+
+Paramaters: `contactId`,
+{
+"favorite": true <=== `required`
+}
+Media type: aplication/json
+Response example value:
+{
+"\_id": "62a86a9b3fc333ef2a601319",
+"name": "Ajax Poly",
+"email": "nulla.ante@vestibul.co.uk",
+"phone": "(992) 914-3792",
+"favorite": true <=== `As a response you will get an object with updated status "favorite"`
+}
+
+### Scripts:
+
+- `npm start` &mdash; start server in "production" mode;
+- `npm run start:dev` &mdash; start server in "development" mode;
+- `npm run lint` &mdash; run code verification with eslint, must be performed before each PR and correct all linter errors;
+- `npm lint:fix` &mdash; same code verification but with automatic correction simple errors;
