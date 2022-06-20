@@ -3,6 +3,8 @@ const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
+// const decodeToken = jwt.decode(token);
+
 const routers = require("./routes/api");
 
 const app = express();
