@@ -4,7 +4,7 @@ const { upload } = require("../../middlewares");
 
 const { users: ctrl } = require("../../controllers");
 
-const { auth } = require("../../middlewares");
+const { auth, resize } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -14,6 +14,7 @@ router.patch(
   "/avatars",
   auth,
   upload.single("avatarURL"),
+  resize,
   ctrlWrapper(ctrl.updateAvatar)
 );
 

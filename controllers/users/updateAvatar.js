@@ -1,6 +1,5 @@
 const fs = require("fs/promises");
 const path = require("path");
-const Jimp = require("jimp");
 
 const { User } = require("../../models/user");
 
