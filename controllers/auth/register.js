@@ -4,7 +4,7 @@ const gravatar = require("gravatar");
 
 const { User } = require("../../models/user");
 
-const { createError } = require("../../helpers");
+const { createError, sendMail } = require("../../helpers");
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -25,6 +25,12 @@ const register = async (req, res) => {
       email: result.email,
       subscription: result.subscription,
     },
+  });
+
+  sendMail({
+    to: email,
+    subject: "Confirm your email",
+    html: "<a>Click here to confirm your email</a>",
   });
 };
 

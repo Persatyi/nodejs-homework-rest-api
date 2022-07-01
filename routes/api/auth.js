@@ -22,6 +22,8 @@ router.post(
   ctrlWrapper(ctrl.login)
 );
 
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
+
 router.get("/users/current", auth, ctrlWrapper(ctrl.getCurrent));
 
 router.put("/users/logout", auth, ctrlWrapper(ctrl.logout));
